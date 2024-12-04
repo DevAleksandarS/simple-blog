@@ -31,13 +31,11 @@ def create_user_route():
         )
 
     else:
-        [success, response, code] = create_user(data)
+        [success, response, code, user_id] = create_user(data)
 
         if success:
             return (
-                jsonify(
-                    {"message": response["message"], "userId": response["user_id"]}
-                ),
+                jsonify({"message": response["message"], "userId": user_id}),
                 code,
             )
 

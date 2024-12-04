@@ -7,12 +7,12 @@ from typing import Tuple, Optional
 from schemas.response_type_schema import ResponseType
 
 
-def create_user(user_data: User) -> Tuple[bool, ResponseType, int, Optional[int]]:
+def create_user(user_data: UserSchema) -> Tuple[bool, ResponseType, int, Optional[int]]:
     """
     Create user & store it in DB
     """
 
-    user = get_user_by_username(user_data.username)
+    [_, _, _, user] = get_user_by_username(user_data["username"])
 
     if user:
         return (
@@ -22,6 +22,7 @@ def create_user(user_data: User) -> Tuple[bool, ResponseType, int, Optional[int]
                 "message": "A user with this username already exists",
             },
             409,
+            None,
         )
 
     user_schema = UserSchema()
@@ -55,11 +56,12 @@ def create_user(user_data: User) -> Tuple[bool, ResponseType, int, Optional[int]
                 "message": "A user with this username already exists",
             },
             409,
+            None,
         )
 
     except Exception as e:
         db.session.rollback()
-        return (False, {"error": "Internal server error", "message": str(e)}, 500)
+        return (False, {"error": "Internal server error", "message": str(e)}, 500, None)
 
 
 def get_user(user_id: str) -> Tuple[bool, ResponseType, int, Optional[User]]:
