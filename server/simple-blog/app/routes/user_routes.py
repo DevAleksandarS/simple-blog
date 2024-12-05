@@ -49,7 +49,7 @@ def create_user_route():
 @user_bp.route("/block/<int:user_id>", methods=["POST"])
 @require_api_key
 def block_user_route(user_id: int):
-    """Blocks user"""
+    """Block user"""
 
     [success, response, code] = block_user(user_id)
 
