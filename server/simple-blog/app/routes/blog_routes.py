@@ -7,7 +7,7 @@ blog_bp = Blueprint("blogs", __name__)
 
 @blog_bp.route("/<int:blog_id>", methods=["GET"])
 @require_api_key
-def get(blog_id):
+def get(blog_id: int):
     """Get blog by ID"""
 
     blog = Blog.query.get(blog_id)

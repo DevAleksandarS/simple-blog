@@ -12,6 +12,8 @@ class User(db.Model):
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
+    admin = db.Column(db.Boolean, default=False, nullable=False)
+    blocked = db.Column(db.Boolean, default=False, nullable=False)
 
     def set_password(self, plain_password):
         """Hashes the password using bcrypt and stores it."""
