@@ -2,15 +2,14 @@ from flask import Blueprint, request, jsonify
 from decorators.api_decorator import require_api_key
 from models.users_model import User
 from database import db
-from sqlalchemy.exc import IntegrityError
-from services.user_service import create_user
+from services.user_service import create_user, block_user
 
 user_bp = Blueprint("users", __name__)
 
 
 @user_bp.route("/<int:user_id>", methods=["GET"])
 @require_api_key
-def get(user_id):
+def get_user_route(user_id):
     """Get user by ID"""
 
     return user_id
@@ -22,6 +21,7 @@ def create_user_route():
     """Create a new user"""
 
     data = request.get_json()
+
     if not data:
         return (
             jsonify(
@@ -44,3 +44,23 @@ def create_user_route():
                 jsonify({"message": response["message"], "error": response["error"]}),
                 code,
             )
+
+
+@user_bp.route("/block/<int:user_id>", methods=["POST"])
+@require_api_key
+def block_user_route(user_id: int):
+    """Block user"""
+
+    [success, response, code] = block_user(user_id)
+
+    if success:
+        return (
+            jsonify({"message": response["message"]}),
+            code,
+        )
+
+    else:
+        return (
+            jsonify({"message": response["message"], "error": response["error"]}),
+            code,
+        )

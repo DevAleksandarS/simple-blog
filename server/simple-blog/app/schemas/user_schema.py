@@ -11,3 +11,5 @@ class UserSchema(Schema):
         required=True, load_only=True, validate=Length(min=6, max=100)
     )
     password_hash = fields.Str(dump_only=True)
+    admin = fields.Bool(missing=False)
+    blocked = fields.Bool(missing=False)

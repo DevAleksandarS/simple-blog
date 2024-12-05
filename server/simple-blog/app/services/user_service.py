@@ -65,6 +65,9 @@ def create_user(user_data: UserSchema) -> Tuple[bool, ResponseType, int, Optiona
 
 
 def get_user(user_id: str) -> Tuple[bool, ResponseType, int, Optional[User]]:
+    """
+    Get user by user_id
+    """
     user: Optional[User] = User.query.get(user_id)
 
     if user:
@@ -84,6 +87,9 @@ def get_user(user_id: str) -> Tuple[bool, ResponseType, int, Optional[User]]:
 def get_user_by_username(
     username: str,
 ) -> Tuple[bool, ResponseType, int, Optional[User]]:
+    """
+    Get user by username
+    """
     user: Optional[User] = User.query.filter_by(username=username).first()
 
     if user:
@@ -97,4 +103,35 @@ def get_user_by_username(
             },
             404,
             None,
+        )
+
+
+def block_user(user_id: int) -> Tuple[bool, ResponseType, int]:
+    """
+    Find user by user_id, than block user
+    """
+    try:
+        user = User.query.get(user_id)
+
+        if not user:
+            return (
+                False,
+                {
+                    "message": "User not found.",
+                    "error": f"No user exists with the ID: {user_id}",
+                },
+                404,
+            )
+
+        user.blocked = True
+        db.session.commit()
+
+        return (True, {"message": "User blocked successfully."}, 200)
+
+    except Exception as e:
+        db.session.rollback()
+        return (
+            False,
+            {"message": "Error", "error": f"An error occurred: {str(e)}"},
+            404,
         )
