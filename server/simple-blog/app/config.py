@@ -9,6 +9,10 @@ class Config:
     if not API_SECRET_KEY:
         raise ValueError("API_SECRET_KEY is not set in the environment")
 
+    JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
+    if not JWT_SECRET_KEY:
+        raise ValueError("JWT_SECRET_KEY is not set in the environment")
+
     POSTGRES_USER = os.getenv("POSTGRES_USER")
     if not POSTGRES_USER:
         raise ValueError("POSTGRES_USER is not set in the environment")

@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
-from database import db, init_db
+from database import init_db
+from jwt_utils import init_jwt
 from routes.auth_routes import auth_bp
 from routes.user_routes import user_bp
 from routes.blog_routes import blog_bp
@@ -12,6 +13,9 @@ app.config.from_object(Config)
 
 # Initialize database
 init_db(app)
+
+# Initialize JWT
+init_jwt(app)
 
 
 @app.route("/", methods=["GET"])
