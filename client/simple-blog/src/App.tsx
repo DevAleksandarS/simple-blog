@@ -1,12 +1,25 @@
-import "./App.css";
+import { NextUIProvider } from "@nextui-org/system";
+import { Routes, Route, useNavigate, useHref } from "react-router";
+import DefaultPage from "./pages/DefaultPage";
+import AuthPage from "./pages/admin/AuthPage";
+import AdminLayout from "./layouts/AdminLayout";
+import DashboardPage from "./pages/admin/DashboardPage";
 
 function App() {
+  const navigate = useNavigate();
+
   return (
-    <>
-      <h1 className="text-3xl font-bold underline text-blue-700">
-        Hello World
-      </h1>
-    </>
+    <NextUIProvider navigate={navigate} useHref={useHref}>
+      <Routes>
+        <Route index path="/" element={<DefaultPage />} />
+
+        <Route path="admin" element={<AuthPage />} />
+
+        <Route path="admin" element={<AdminLayout />}>
+          <Route path="dashboard" element={<DashboardPage />} />
+        </Route>
+      </Routes>
+    </NextUIProvider>
   );
 }
 

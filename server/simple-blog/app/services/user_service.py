@@ -7,6 +7,64 @@ from typing import Tuple, Optional
 from schemas.response_type_schema import ResponseType
 
 
+def create_admin(
+    user_data: UserSchema,
+) -> Tuple[bool, ResponseType, int, Optional[int]]:
+    """
+    Create first user as admin & store it in DB
+    """
+
+    if User.query.first() is not None:
+        return (
+            False,
+            {
+                "error": "Admin creation restricted",
+                "message": "An admin user already exists in the system.",
+            },
+            403,
+            None,
+        )
+
+    user_schema = UserSchema()
+
+    try:
+        validated_data = user_schema.load(user_data)
+    except ValidationError as err:
+        return (False, {"message": "Validation error", "errors": err.messages}, 400)
+
+    try:
+        new_user = User(
+            username=validated_data["username"],
+            first_name=validated_data["first_name"],
+            last_name=validated_data["last_name"],
+            admin=True,
+        )
+        new_user.set_password(validated_data["password"])
+
+        db.session.add(new_user)
+        db.session.flush()
+
+        db.session.commit()
+
+        return (True, {"message": "User created successfully"}, 201, new_user.id)
+
+    except IntegrityError:
+        db.session.rollback()
+        return (
+            False,
+            {
+                "error": "Duplicate entry",
+                "message": "A user with this username already exists",
+            },
+            409,
+            None,
+        )
+
+    except Exception as e:
+        db.session.rollback()
+        return (False, {"error": "Internal server error", "message": str(e)}, 500, None)
+
+
 def create_user(user_data: UserSchema) -> Tuple[bool, ResponseType, int, Optional[int]]:
     """
     Create user & store it in DB
