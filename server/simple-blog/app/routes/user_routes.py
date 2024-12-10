@@ -29,7 +29,7 @@ def create_admin_route():
         )
 
     else:
-        [success, response, code, user_id] = create_admin(data)
+        [success, response, code, user_id] = create_admin(data) 
 
         if success:
             return (
