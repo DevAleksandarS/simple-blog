@@ -1,12 +1,15 @@
-from flask import Flask, request, jsonify
+from flask import Flask
+from flask_cors import CORS
 from database import init_db
 from jwt_utils import init_jwt
 from routes.auth_routes import auth_bp
 from routes.user_routes import user_bp
 from routes.blog_routes import blog_bp
 from config import Config
+import os
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"*": {"origins": os.getenv("CLIENT_URL")}})
 
 # Set APP config
 app.config.from_object(Config)
