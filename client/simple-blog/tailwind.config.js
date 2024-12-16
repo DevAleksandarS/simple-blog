@@ -17,6 +17,8 @@ export default {
   darkMode: "class",
   plugins: [nextui({
     addCommonColors: true,
-  })],
+  }),
+  require('@tailwindcss/typography'),
+  ],
 }
 
