@@ -6,3 +6,4 @@ flask-marshmallow
 marshmallow
 psycopg2-binary
 bcrypt
+flask-cors
