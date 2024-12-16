@@ -1,11 +1,13 @@
 import AdminAuthLayout from "../../layouts/AdminAuthLayout";
 
-function AuthPage() {
+function InitPage() {
   return (
     <AdminAuthLayout>
-      <div></div>
+      <div>
+        <h2>Registration</h2>
+      </div>
     </AdminAuthLayout>
   );
 }
 
-export default AuthPage;
+export default InitPage;
