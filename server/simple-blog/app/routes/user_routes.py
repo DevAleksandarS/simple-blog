@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from decorators.api_decorator import require_api_key
 from services.user_service import create_admin, create_user, block_user
+from models.users_model import User
 
 user_bp = Blueprint("users", __name__)
 
@@ -29,7 +30,7 @@ def create_admin_route():
         )
 
     else:
-        [success, response, code, user_id] = create_admin(data) 
+        [success, response, code, user_id] = create_admin(data)
 
         if success:
             return (
@@ -92,4 +93,35 @@ def block_user_route(user_id: int):
         return (
             jsonify({"message": response["message"], "error": response["error"]}),
             code,
+        )
+
+
+@user_bp.route("/exist", methods=["GET"])
+@require_api_key
+def check_users_exist_route():
+    """Check if there is users in DB"""
+
+    try:
+        users_exist = User.query.first() is not None
+
+        if users_exist:
+            return (
+                jsonify({"exist": True, "message": "Users exist in the database."}),
+                200,
+            )
+        else:
+            return (
+                jsonify({"exist": False, "message": "No users found in the database."}),
+                200,
+            )
+
+    except Exception as e:
+        return (
+            jsonify(
+                {
+                    "message": "An error occurred while checking user existence.",
+                    "error": str(e),
+                }
+            ),
+            500,
         )

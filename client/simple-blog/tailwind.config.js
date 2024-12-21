@@ -10,13 +10,15 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'auth-img': "url('./images/auth-background.webp')",
+        'auth-img': "url('/images/auth-background.webp')",
       }
     },
   },
   darkMode: "class",
   plugins: [nextui({
     addCommonColors: true,
-  })],
+  }),
+  require('@tailwindcss/typography'),
+  ],
 }
 

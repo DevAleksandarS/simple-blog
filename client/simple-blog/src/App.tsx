@@ -4,6 +4,7 @@ import DefaultPage from "./pages/DefaultPage";
 import AuthPage from "./pages/admin/AuthPage";
 import AdminLayout from "./layouts/AdminLayout";
 import DashboardPage from "./pages/admin/DashboardPage";
+import InitPage from "./pages/admin/InitPage";
 
 function App() {
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ function App() {
         <Route path="admin" element={<AuthPage />} />
 
         <Route path="admin" element={<AdminLayout />}>
+          <Route path="init" element={<InitPage />} />
+
           <Route path="dashboard" element={<DashboardPage />} />
         </Route>
       </Routes>
