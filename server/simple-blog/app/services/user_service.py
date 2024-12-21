@@ -111,7 +111,7 @@ def create_user(user_data: UserSchema) -> Tuple[bool, ResponseType, int, Optiona
             False,
             {
                 "error": "Duplicate entry",
-                "message": "A user with this username already exists",
+                "message": "A user with this username already exists.",
             },
             409,
             None,

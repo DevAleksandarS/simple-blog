@@ -9,7 +9,16 @@ from config import Config
 import os
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"*": {"origins": os.getenv("CLIENT_URL")}})
+cors = CORS(
+    app,
+    resources={
+        r"/*": {
+            "origins": os.getenv("CLIENT_URL"),
+            "allow_headers": ["Authorization", "Content-Type", "X-Requested-With"],
+        }
+    },
+    supports_credentials=True,
+)
 
 # Set APP config
 app.config.from_object(Config)
@@ -22,7 +31,7 @@ init_jwt(app)
 
 
 @app.route("/", methods=["GET"])
-def login():
+def default():
     return "<h1>Welcome to Simple Blog BE</h1>"
 
 
