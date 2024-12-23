@@ -6,6 +6,7 @@ import { UsersExistInterface } from "../../interfaces/ServerResponse.interface";
 import { useNavigate } from "react-router";
 import { RoutesNavigatorEnum } from "../../enums/Routes.enum";
 import { ServerRoutesEnum } from "../../enums/ServerRoutes.enum";
+import ButtonComponent from "../../components/ButtonComponent";
 
 function InitPage() {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ function InitPage() {
         <p>
           The Init page registers the first user as an admin if no users exist.
         </p>
+        <ButtonComponent fullWidth={true}>Register</ButtonComponent>
       </div>
     </AdminAuthLayout>
   );

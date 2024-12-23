@@ -1,6 +1,7 @@
 import Logo from "../assets/logo.svg?react";
+import { ChildrenPropInterface } from "../interfaces/ChildrenProp.interface";
 
-function AdminAuthLayout({ children }) {
+function AdminAuthLayout({ children }: ChildrenPropInterface) {
   return (
     <main className="flex h-screen bg-zinc-900">
       <div className="flex flex-col justify-center gap-5 w-2/6 px-5 py-3">
