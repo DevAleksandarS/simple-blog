@@ -5,6 +5,10 @@ load_dotenv()
 
 
 class Config:
+    CLIENT_URL = os.getenv("CLIENT_URL")
+    if not CLIENT_URL:
+        raise ValueError("CLIENT_URL is not set in the environment")
+
     API_SECRET_KEY = os.getenv("API_SECRET_KEY")
     if not API_SECRET_KEY:
         raise ValueError("API_SECRET_KEY is not set in the environment")
