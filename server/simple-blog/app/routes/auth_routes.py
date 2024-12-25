@@ -14,21 +14,22 @@ def login_route():
     username = data.get("username")
     password = data.get("password")
 
-    [success, response, status_code, user] = get_user_by_username(username)
+    [success, code, user, error] = get_user_by_username(username)
 
     if not success:
-        return jsonify(response), status_code
+        return jsonify({"error": error}), code
 
     if not user.check_password(password):
-        return jsonify({"message": "Invalid credentials"}), 401
+        return jsonify({"error": "Invalid credentials"}), 401
 
     access_token = create_access_token(identity=user.username)
     refresh_token = create_refresh_token(identity=user.username)
 
+    """TODO: Take a look at this when we implment fully login logic"""
+
     return (
         jsonify(
             {
-                "message": "Login successful",
                 "tokens": {"access": access_token, "refresh": refresh_token},
                 "user": {
                     "id": user.id,
