@@ -17,30 +17,28 @@ def get_user_route(user_id):
 @user_bp.route("/create-admin", methods=["POST"])
 @require_api_key
 def create_admin_route():
-    """Create a first user as admin"""
+    """Create admin if there isn't users in system"""
 
     data = request.get_json()
 
     if not data:
         return (
-            jsonify(
-                {"error": "Invalid request", "message": "Request body must be JSON"}
-            ),
+            jsonify({"error": "Invalid request"}),
             400,
         )
 
     else:
-        [success, response, code, user_id] = create_admin(data)
+        [success, code, user_id, error] = create_admin(data)
 
         if success:
             return (
-                jsonify({"message": response["message"], "userId": user_id}),
+                jsonify({"userId": user_id}),
                 code,
             )
 
         else:
             return (
-                jsonify({"message": response["message"], "error": response["error"]}),
+                jsonify({"error": error}),
                 code,
             )
 
@@ -54,24 +52,22 @@ def create_user_route():
 
     if not data:
         return (
-            jsonify(
-                {"error": "Invalid request", "message": "Request body must be JSON"}
-            ),
+            jsonify({"error": "Invalid request"}),
             400,
         )
 
     else:
-        [success, response, code, user_id] = create_user(data)
+        [success, code, user_id, error] = create_user(data)
 
         if success:
             return (
-                jsonify({"message": response["message"], "userId": user_id}),
+                jsonify({"userId": user_id}),
                 code,
             )
 
         else:
             return (
-                jsonify({"message": response["message"], "error": response["error"]}),
+                jsonify({"error": error}),
                 code,
             )
 
@@ -81,17 +77,17 @@ def create_user_route():
 def block_user_route(user_id: int):
     """Block user"""
 
-    [success, response, code] = block_user(user_id)
+    [success, code, error] = block_user(user_id)
 
     if success:
         return (
-            jsonify({"message": response["message"]}),
+            jsonify({"message": "User blocked successfully"}),
             code,
         )
 
     else:
         return (
-            jsonify({"message": response["message"], "error": response["error"]}),
+            jsonify({"error": error}),
             code,
         )
 
@@ -106,12 +102,12 @@ def check_users_exist_route():
 
         if users_exist:
             return (
-                jsonify({"exist": True, "message": "Users exist in the database."}),
+                jsonify({"exist": True}),
                 200,
             )
         else:
             return (
-                jsonify({"exist": False, "message": "No users found in the database."}),
+                jsonify({"exist": False}),
                 200,
             )
 
@@ -119,7 +115,6 @@ def check_users_exist_route():
         return (
             jsonify(
                 {
-                    "message": "An error occurred while checking user existence.",
                     "error": str(e),
                 }
             ),
