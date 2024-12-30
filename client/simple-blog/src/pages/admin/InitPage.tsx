@@ -69,7 +69,7 @@ function InitPage() {
   ) : (
     <AdminAuthLayout>
       <div className="prose prose-lg prose-invert prose-h2:mb-4">
-        <h2>Registration</h2>
+        <h2>Initialize</h2>
         <p>
           The Init page registers the first user as an admin if no users exist.
         </p>
