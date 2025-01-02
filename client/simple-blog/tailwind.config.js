@@ -7,6 +7,9 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
+  safelist: [
+    {pattern: /(bg|border|text)-(blue|red|green|orange)-(100|400|500|700)/}
+  ],
   theme: {
     extend: {
       backgroundImage: {
