@@ -8,11 +8,9 @@ import {
 import { useNavigate } from "react-router";
 import { RoutesNavigatorEnum } from "../../enums/Routes.enum";
 import { ServerRoutesEnum } from "../../enums/ServerRoutes.enum";
-import ButtonComponent from "../../components/ButtonComponent";
-import { Form } from "@nextui-org/form";
-import { Input } from "@nextui-org/react";
-import { ButtonTypes } from "../../enums/ButtonComponent.enum";
 import { sendReq } from "../../utils/CustomAxios.utils";
+import FormComponent from "../../components/FormComponent";
+import { AdminRegistrationFormStructure } from "../../definitions/Form.definition";
 
 function InitPage() {
   const [pageLoading, setPageLoading] = useState(true);
@@ -70,68 +68,17 @@ function InitPage() {
     <AdminAuthLayout>
       <div className="prose prose-lg prose-invert prose-h2:mb-4">
         <h2>Initialize</h2>
+
         <p>
           The Init page registers the first user as an admin if no users exist.
         </p>
-        {/* TODO: Create Form Component */}
-        <Form
-          className="prose w-full justify-center items-center gap-3"
-          onSubmit={onSubmit}
-        >
-          <Input
-            classNames={{
-              label: "!text-white",
-            }}
-            isRequired
-            label="First Name"
-            labelPlacement="outside"
-            placeholder="First Name"
-            name="first_name"
-          />
 
-          <Input
-            classNames={{
-              label: "!text-white",
-            }}
-            isRequired
-            label="Last Name"
-            labelPlacement="outside"
-            placeholder="Last Name"
-            name="last_name"
-          />
-
-          <Input
-            classNames={{
-              label: "!text-white",
-            }}
-            isRequired
-            label="Username"
-            labelPlacement="outside"
-            placeholder="Username"
-            name="username"
-          />
-
-          <Input
-            classNames={{
-              label: "!text-white",
-            }}
-            isRequired
-            label="Password"
-            labelPlacement="outside"
-            placeholder="Password"
-            name="password"
-            type="password"
-          />
-
-          <ButtonComponent
-            className="mt-3"
-            type={ButtonTypes.SUBMIT}
-            fullWidth={true}
-            isLoading={createAdminLoading}
-          >
-            Register
-          </ButtonComponent>
-        </Form>
+        <FormComponent
+          structure={AdminRegistrationFormStructure}
+          callback={onSubmit}
+          buttonText="Registrate"
+          isLoading={createAdminLoading}
+        ></FormComponent>
       </div>
     </AdminAuthLayout>
   );
