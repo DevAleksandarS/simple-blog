@@ -11,11 +11,14 @@ import { ServerRoutesEnum } from "../../enums/ServerRoutes.enum";
 import { sendReq } from "../../utils/CustomAxios.utils";
 import FormComponent from "../../components/FormComponent";
 import { AdminRegistrationFormStructure } from "../../definitions/Form.definition";
+import { useSnackbar } from "notistack";
+import { ToastVarientEnum } from "../../enums/ToastComponent";
 
 function InitPage() {
   const [pageLoading, setPageLoading] = useState(true);
   const [createAdminLoading, setCreateAdminLoading] = useState(false);
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     sendReq<UsersExistInterface>({
@@ -49,13 +52,21 @@ function InitPage() {
     })
       .then((res) => {
         if (!res.data.error) {
-          console.log(res.data.userId);
+          enqueueSnackbar("Admin successfuly created.", {
+            variant: ToastVarientEnum.SUCCESS,
+          });
         } else {
           console.error(res.data.error);
+          enqueueSnackbar("An error occurred. Please try again later.", {
+            variant: ToastVarientEnum.ERROR,
+          });
         }
       })
       .catch((err) => {
         console.error(err);
+        enqueueSnackbar("An error occurred. Please try again later.", {
+          variant: ToastVarientEnum.ERROR,
+        });
       })
       .finally(() => {
         setCreateAdminLoading(false);
