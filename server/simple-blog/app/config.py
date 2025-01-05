@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import os
+import datetime
 
 load_dotenv()
 
@@ -30,4 +31,11 @@ class Config:
 
     SQLALCHEMY_DATABASE_URI = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:5432/{POSTGRES_DB}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
     DEBUG = os.getenv("FLASK_DEBUG", "false").lower() == "true"
+
+    JWT_COOKIE_SECURE = False
+    JWT_TOKEN_LOCATION = ["cookies"]
+    JWT_REFRESH_COOKIE_PATH = "/auth/refresh"
+    JWT_ACCESS_TOKEN_EXPIRES = datetime.timedelta(minutes=30)
+    JWT_REFRESH_TOKEN_EXPIRES = datetime.timedelta(days=30)

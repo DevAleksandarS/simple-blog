@@ -12,7 +12,7 @@ import { sendReq } from "../../utils/CustomAxios.utils";
 import FormComponent from "../../components/FormComponent";
 import { AdminRegistrationFormStructure } from "../../definitions/Form.definition";
 import { useSnackbar } from "notistack";
-import { ToastVarientEnum } from "../../enums/ToastComponent";
+import { ToastVarientEnum } from "../../enums/ToastComponent.enum";
 
 function InitPage() {
   const [pageLoading, setPageLoading] = useState(true);
@@ -21,10 +21,13 @@ function InitPage() {
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    sendReq<UsersExistInterface>({
-      method: "GET",
-      url: ServerRoutesEnum.USERS_EXIST,
-    })
+    sendReq<UsersExistInterface>(
+      {
+        method: "GET",
+        url: ServerRoutesEnum.USERS_EXIST,
+      },
+      false
+    )
       .then((res) => {
         if (res.data?.exist) {
           navigate(RoutesNavigatorEnum.ADMIN_LOGIN, { replace: true });
@@ -45,13 +48,17 @@ function InitPage() {
 
     const data = Object.fromEntries(new FormData(e.currentTarget));
 
-    sendReq<CreateAdminInterface>({
-      method: "POST",
-      url: ServerRoutesEnum.CREATE_ADMIN,
-      data: data,
-    })
+    sendReq<CreateAdminInterface>(
+      {
+        method: "POST",
+        url: ServerRoutesEnum.CREATE_ADMIN,
+        data: data,
+      },
+      false
+    )
       .then((res) => {
         if (!res.data.error) {
+          navigate(RoutesNavigatorEnum.ADMIN_LOGIN, { replace: true });
           enqueueSnackbar("Admin successfuly created.", {
             variant: ToastVarientEnum.SUCCESS,
           });

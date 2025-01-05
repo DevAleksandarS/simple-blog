@@ -7,4 +7,5 @@ export interface ButtonComponentInterface {
   fullWidth?: boolean;
   type?: ButtonTypes;
   loaderColor?: string;
+  callback?: () => void;
 }
