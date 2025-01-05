@@ -8,3 +8,15 @@ export interface CreateAdminInterface {
   message: string;
   error?: string;
 }
+
+export interface UserLoginInterface {
+  id?: string;
+  username?: string;
+  firstName?: string;
+  lastName?: string;
+  error?: string;
+}
+
+export interface UserLogoutInterface {
+  logout?: boolean;
+}

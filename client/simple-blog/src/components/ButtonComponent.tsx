@@ -11,9 +11,11 @@ function ButtonComponent({
   fullWidth,
   type = ButtonTypes.BUTTON,
   loaderColor = "#000",
+  callback,
 }: ButtonComponentInterface) {
   return (
     <Button
+      onClick={callback ? callback : undefined}
       isLoading={isLoading}
       type={type}
       spinner={

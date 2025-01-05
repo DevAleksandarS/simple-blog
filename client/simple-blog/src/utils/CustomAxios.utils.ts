@@ -6,6 +6,7 @@ export const sendReq = async <T>(
   needsTokes: boolean = true
 ): Promise<AxiosResponse<T>> => {
   axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
+  axios.defaults.withCredentials = true;
 
   const config = {
     ...axiosParams,
@@ -23,8 +24,13 @@ export const sendReq = async <T>(
         console.warn("Access token expired. Attempting to refresh...");
 
         try {
-          await axios.post(ServerRoutesEnum.REFRESH_TOKEN, null, {
-            headers: { "Content-Type": "application/json" },
+          await axios.request({
+            method: "POST",
+            url: ServerRoutesEnum.REFRESH_TOKEN,
+            headers: {
+              Authorization: import.meta.env.VITE_API_KEY,
+              "Content-Type": "application/json",
+            },
           });
 
           console.info("Token refreshed. Retrying original request...");

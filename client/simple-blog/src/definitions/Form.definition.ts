@@ -1,6 +1,7 @@
 import {
   AdminRegistrationInputId,
   InputType,
+  UserLoginInputId,
 } from "../enums/FormComponent.enum";
 import { FormStructureInterface } from "../interfaces/FormComponent.interface";
 
@@ -28,6 +29,23 @@ export const AdminRegistrationFormStructure: FormStructureInterface[] = [
   },
   {
     id: AdminRegistrationInputId.PASSWORD,
+    type: InputType.PASSWORD,
+    isRequired: true,
+    label: "Password",
+    placeholder: "Password",
+  },
+];
+
+export const UserLoginFormStructure: FormStructureInterface[] = [
+  {
+    id: UserLoginInputId.USERNAME,
+    type: InputType.TEXT,
+    isRequired: true,
+    label: "Username",
+    placeholder: "Username",
+  },
+  {
+    id: UserLoginInputId.PASSWORD,
     type: InputType.PASSWORD,
     isRequired: true,
     label: "Password",

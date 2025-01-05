@@ -1,7 +1,8 @@
 export enum RoutesEnum {
-    ADMIN = "admin",
+  ADMIN = "admin",
 }
 
 export enum RoutesNavigatorEnum {
-    ADMIN_LOGIN = "/admin",
+  ADMIN_LOGIN = "/admin",
+  USER_DASHBOARD = "/admin/dashboard",
 }

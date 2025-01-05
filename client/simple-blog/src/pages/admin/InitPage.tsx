@@ -58,6 +58,7 @@ function InitPage() {
     )
       .then((res) => {
         if (!res.data.error) {
+          navigate(RoutesNavigatorEnum.ADMIN_LOGIN, { replace: true });
           enqueueSnackbar("Admin successfuly created.", {
             variant: ToastVarientEnum.SUCCESS,
           });

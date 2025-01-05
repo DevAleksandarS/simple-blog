@@ -34,7 +34,8 @@ class Config:
 
     DEBUG = os.getenv("FLASK_DEBUG", "false").lower() == "true"
 
-    JWT_TOKEN_LOCATION = ["headers", "cookies"]
+    JWT_COOKIE_SECURE = False
+    JWT_TOKEN_LOCATION = ["cookies"]
     JWT_REFRESH_COOKIE_PATH = "/auth/refresh"
     JWT_ACCESS_TOKEN_EXPIRES = datetime.timedelta(minutes=30)
     JWT_REFRESH_TOKEN_EXPIRES = datetime.timedelta(days=30)

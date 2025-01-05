@@ -11,3 +11,8 @@ export enum AdminRegistrationInputId {
   USERNAME = "username",
   PASSWORD = "password",
 }
+
+export enum UserLoginInputId {
+  USERNAME = "username",
+  PASSWORD = "password",
+}
