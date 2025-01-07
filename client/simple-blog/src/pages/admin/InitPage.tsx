@@ -1,4 +1,3 @@
-import AdminAuthLayout from "../../layouts/AdminAuthLayout";
 import LoaderOverlayComponent from "../../components/LoaderOverlayComponent";
 import { useEffect, useState } from "react";
 import {
@@ -83,22 +82,20 @@ function InitPage() {
   return pageLoading ? (
     <LoaderOverlayComponent></LoaderOverlayComponent>
   ) : (
-    <AdminAuthLayout>
-      <div className="prose prose-lg prose-invert prose-h2:mb-4">
-        <h2>Initialize</h2>
+    <div className="prose prose-lg prose-invert prose-h2:mb-4">
+      <h2>Initialize</h2>
 
-        <p>
-          The Init page registers the first user as an admin if no users exist.
-        </p>
+      <p>
+        The Init page registers the first user as an admin if no users exist.
+      </p>
 
-        <FormComponent
-          structure={AdminRegistrationFormStructure}
-          callback={onSubmit}
-          buttonText="Registrate"
-          isLoading={createAdminLoading}
-        ></FormComponent>
-      </div>
-    </AdminAuthLayout>
+      <FormComponent
+        structure={AdminRegistrationFormStructure}
+        callback={onSubmit}
+        buttonText="Registrate"
+        isLoading={createAdminLoading}
+      ></FormComponent>
+    </div>
   );
 }
 
