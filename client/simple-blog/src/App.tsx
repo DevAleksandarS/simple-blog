@@ -7,6 +7,7 @@ import DashboardPage from "./pages/admin/DashboardPage";
 import InitPage from "./pages/admin/InitPage";
 import { SnackbarProvider } from "notistack";
 import ToastComponent from "./components/ToastComponent";
+import AdminAuthLayout from "./layouts/AdminAuthLayout";
 
 function App() {
   const navigate = useNavigate();
@@ -31,13 +32,14 @@ function App() {
     >
       <NextUIProvider navigate={navigate} useHref={useHref}>
         <Routes>
-          <Route index path="/" element={<DefaultPage />} />
+          <Route index element={<DefaultPage />} />
 
-          <Route path="admin" element={<AuthPage />} />
+          <Route path="admin" element={<AdminAuthLayout />}>
+            <Route index element={<AuthPage />} />
+            <Route path="init" element={<InitPage />} />
+          </Route>
 
           <Route path="admin" element={<AdminLayout />}>
-            <Route path="init" element={<InitPage />} />
-
             <Route path="dashboard" element={<DashboardPage />} />
           </Route>
         </Routes>

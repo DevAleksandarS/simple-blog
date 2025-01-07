@@ -1,6 +1,5 @@
 import { useState } from "react";
 import FormComponent from "../../components/FormComponent";
-import AdminAuthLayout from "../../layouts/AdminAuthLayout";
 import { UserLoginFormStructure } from "../../definitions/Form.definition";
 import { sendReq } from "../../utils/CustomAxios.utils";
 import { UserLoginInterface } from "../../interfaces/ServerResponse.interface";
@@ -55,23 +54,21 @@ function AuthPage() {
   };
 
   return (
-    <AdminAuthLayout>
-      <div className="prose prose-lg prose-invert prose-h2:mb-4">
-        <h2>Login</h2>
+    <div className="prose prose-lg prose-invert prose-h2:mb-4">
+      <h2>Login</h2>
 
-        <p>
-          Login to your account to access personalized features and manage your
-          preferences.
-        </p>
+      <p>
+        Login to your account to access personalized features and manage your
+        preferences.
+      </p>
 
-        <FormComponent
-          structure={UserLoginFormStructure}
-          callback={onSubmit}
-          buttonText="Login"
-          isLoading={loginLoading}
-        ></FormComponent>
-      </div>
-    </AdminAuthLayout>
+      <FormComponent
+        structure={UserLoginFormStructure}
+        callback={onSubmit}
+        buttonText="Login"
+        isLoading={loginLoading}
+      ></FormComponent>
+    </div>
   );
 }
 
