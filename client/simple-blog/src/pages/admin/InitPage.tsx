@@ -1,4 +1,3 @@
-import LoaderOverlayComponent from "../../components/LoaderOverlayComponent";
 import { useEffect, useState } from "react";
 import {
   CreateAdminInterface,
@@ -12,14 +11,17 @@ import FormComponent from "../../components/FormComponent";
 import { AdminRegistrationFormStructure } from "../../definitions/Form.definition";
 import { useSnackbar } from "notistack";
 import { ToastVarientEnum } from "../../enums/ToastComponent.enum";
+import { useLoadingScreen } from "../../contexts/LoadingOverlayContext";
 
 function InitPage() {
-  const [pageLoading, setPageLoading] = useState(true);
   const [createAdminLoading, setCreateAdminLoading] = useState(false);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  const { setIsScreenLoading } = useLoadingScreen();
 
   useEffect(() => {
+    setIsScreenLoading(true);
+
     sendReq<UsersExistInterface>(
       {
         method: "GET",
@@ -36,7 +38,7 @@ function InitPage() {
         console.error(err);
       })
       .finally(() => {
-        setPageLoading(false);
+        setIsScreenLoading(false);
       });
   }, []);
 
@@ -79,9 +81,7 @@ function InitPage() {
       });
   };
 
-  return pageLoading ? (
-    <LoaderOverlayComponent></LoaderOverlayComponent>
-  ) : (
+  return (
     <div className="prose prose-lg prose-invert prose-h2:mb-4">
       <h2>Initialize</h2>
 
