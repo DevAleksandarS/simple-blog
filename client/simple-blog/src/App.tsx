@@ -8,6 +8,8 @@ import InitPage from "./pages/admin/InitPage";
 import { SnackbarProvider } from "notistack";
 import ToastComponent from "./components/ToastComponent";
 import AdminAuthLayout from "./layouts/AdminAuthLayout";
+import { OverlayLoadingProvider } from "./contexts/LoadingOverlayContext";
+import LoaderOverlayComponent from "./components/LoaderOverlayComponent";
 
 function App() {
   const navigate = useNavigate();
@@ -31,18 +33,22 @@ function App() {
       preventDuplicate={true}
     >
       <NextUIProvider navigate={navigate} useHref={useHref}>
-        <Routes>
-          <Route index element={<DefaultPage />} />
+        <OverlayLoadingProvider>
+          <Routes>
+            <Route index element={<DefaultPage />} />
 
-          <Route path="admin" element={<AdminAuthLayout />}>
-            <Route index element={<AuthPage />} />
-            <Route path="init" element={<InitPage />} />
-          </Route>
+            <Route path="admin" element={<AdminAuthLayout />}>
+              <Route index element={<AuthPage />} />
+              <Route path="init" element={<InitPage />} />
+            </Route>
 
-          <Route path="admin" element={<AdminLayout />}>
-            <Route path="dashboard" element={<DashboardPage />} />
-          </Route>
-        </Routes>
+            <Route path="admin" element={<AdminLayout />}>
+              <Route path="dashboard" element={<DashboardPage />} />
+            </Route>
+          </Routes>
+
+          <LoaderOverlayComponent />
+        </OverlayLoadingProvider>
       </NextUIProvider>
     </SnackbarProvider>
   );
