@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from "@nextui-org/button";
+import { Button } from "@nextui-org/button";
 import { ButtonComponentInterface } from "../interfaces/ButtonComponent.interface";
 import LoaderComponent from "./LoaderComponent";
 import { LoaderComponentSizesEnum } from "../enums/LoaderComponent.enum";
