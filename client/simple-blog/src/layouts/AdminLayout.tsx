@@ -1,5 +1,4 @@
 import { Outlet, useLocation, useNavigate } from "react-router";
-import ThreeDotsIcon from "../assets/three-dots-icon.svg?react";
 import UserIcon from "../assets/user-icon.svg?react";
 import DashboardIcon from "../assets/dashboard-icon.svg?react";
 import FileIcon from "../assets/file-icon.svg?react";
@@ -13,8 +12,8 @@ function AdminLayout() {
 
   return (
     <main className="flex h-screen">
-      <div className="prose prose-lg prose-invert bg-zinc-900 h-full w-1/5 border-r border-zinc-700 flex flex-col">
-        <div className="p-3">
+      <div className="prose prose-lg prose-invert p-3 bg-zinc-900 h-full w-1/5 border-r border-zinc-700 flex flex-col">
+        <div>
           <div className="flex flex-col gap-2">
             <button
               onClick={() => {
@@ -46,20 +45,16 @@ function AdminLayout() {
           </div>
         </div>
 
-        <div className="flex items-center border-t border-zinc-700 mt-auto">
-          <div className="w-full flex items-center gap-1 p-3">
-            <UserIcon className="w-10 h-10 fill-white" />
-            <p className="m-0">Aleksandar S.</p>
-          </div>
-
-          <div className="h-full border-l border-zinc-700">
+        <div className="flex items-center border-t pt-3 border-zinc-700 mt-auto">
+          <div className="w-full flex items-center gap-1">
             <Button
               variant="light"
               size="sm"
               radius="none"
-              className="p-3 h-full"
+              className="px-3 py-2 h-full w-full rounded-lg justify-start"
             >
-              <ThreeDotsIcon className="w-10 h-10 stroke-white" />
+              <UserIcon className="w-8 h-8 stroke-white" />
+              <p className="m-0 prose prose-lg prose-invert">Aleksandar S.</p>
             </Button>
           </div>
         </div>
