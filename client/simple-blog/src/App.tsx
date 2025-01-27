@@ -10,6 +10,7 @@ import ToastComponent from "./components/ToastComponent";
 import AdminAuthLayout from "./layouts/AdminAuthLayout";
 import { OverlayLoadingProvider } from "./contexts/LoadingOverlayContext";
 import LoaderOverlayComponent from "./components/LoaderOverlayComponent";
+import BlogsPage from "./pages/admin/BlogsPage";
 
 function App() {
   const navigate = useNavigate();
@@ -44,6 +45,7 @@ function App() {
 
             <Route path="admin" element={<AdminLayout />}>
               <Route path="dashboard" element={<DashboardPage />} />
+              <Route path="blogs" element={<BlogsPage />} />
             </Route>
           </Routes>
 
