@@ -6,7 +6,7 @@ import {
 import { useNavigate } from "react-router";
 import { RoutesNavigatorEnum } from "../../enums/Routes.enum";
 import { ServerRoutesEnum } from "../../enums/ServerRoutes.enum";
-import { sendReq } from "../../utils/CustomAxios.utils";
+import { sendReq } from "../../utils/CustomAxios.util";
 import FormComponent from "../../components/FormComponent";
 import { AdminRegistrationFormStructure } from "../../definitions/Form.definition";
 import { useSnackbar } from "notistack";

@@ -8,7 +8,7 @@ import { Button } from "@nextui-org/button";
 import { Popover, PopoverTrigger, PopoverContent } from "@heroui/popover";
 import { useRef, useState } from "react";
 import { useSnackbar } from "notistack";
-import { sendReq } from "../utils/CustomAxios.utils";
+import { sendReq } from "../utils/CustomAxios.util";
 import { UserLogoutInterface } from "../interfaces/ServerResponse.interface";
 import { ServerRoutesEnum } from "../enums/ServerRoutes.enum";
 import { RoutesNavigatorEnum } from "../enums/Routes.enum";
