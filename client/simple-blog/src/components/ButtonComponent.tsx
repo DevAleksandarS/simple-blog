@@ -2,7 +2,8 @@ import { Button } from "@nextui-org/button";
 import { ButtonComponentInterface } from "../interfaces/ButtonComponent.interface";
 import LoaderComponent from "./LoaderComponent";
 import { LoaderComponentSizesEnum } from "../enums/LoaderComponent.enum";
-import { ButtonTypes } from "../enums/ButtonComponent.enum";
+import { ButtonStyles, ButtonTypes } from "../enums/ButtonComponent.enum";
+import "../styles/ButtonComponent.css";
 
 function ButtonComponent({
   children,
@@ -11,8 +12,27 @@ function ButtonComponent({
   fullWidth,
   type = ButtonTypes.BUTTON,
   loaderColor = "#000",
+  style = ButtonStyles.DEFAULT,
   callback,
 }: ButtonComponentInterface) {
+  const getStyle = (): string => {
+    let classes = "";
+
+    switch (style) {
+      case ButtonStyles.ICON:
+        classes += "custom-button-icon";
+        break;
+      default:
+        classes += "custom-button-default";
+        break;
+    }
+
+    if (fullWidth) classes += " w-full";
+    if (className) classes += " " + className;
+
+    return classes;
+  };
+
   return (
     <Button
       onClick={callback ? callback : undefined}
@@ -26,9 +46,7 @@ function ButtonComponent({
           />
         ) : undefined
       }
-      className={`bg-white rounded-lg text-lg px-6 ${className} ${
-        fullWidth ? "w-full" : ""
-      }`}
+      className={getStyle()}
     >
       {isLoading ? "" : children}
     </Button>

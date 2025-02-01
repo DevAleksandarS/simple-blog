@@ -1,4 +1,4 @@
-import { ButtonTypes } from "../enums/ButtonComponent.enum";
+import { ButtonStyles, ButtonTypes } from "../enums/ButtonComponent.enum";
 
 export interface ButtonComponentInterface {
   children: React.ReactNode;
@@ -7,5 +7,6 @@ export interface ButtonComponentInterface {
   fullWidth?: boolean;
   type?: ButtonTypes;
   loaderColor?: string;
+  style?: ButtonStyles;
   callback?: () => void;
 }

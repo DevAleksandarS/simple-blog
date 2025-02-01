@@ -2,21 +2,27 @@ import { Outlet, useLocation, useNavigate } from "react-router";
 import UserIcon from "../assets/user-icon.svg?react";
 import DashboardIcon from "../assets/dashboard-icon.svg?react";
 import FileIcon from "../assets/file-icon.svg?react";
+import MenuIcon from "../assets/menu-icon.svg?react";
+import CloseIcon from "../assets/close-icon.svg?react";
 import { Button } from "@nextui-org/button";
 import { Popover, PopoverTrigger, PopoverContent } from "@heroui/popover";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useSnackbar } from "notistack";
-import { sendReq } from "../utils/CustomAxios.utils";
+import { sendReq } from "../utils/CustomAxios.util";
 import { UserLogoutInterface } from "../interfaces/ServerResponse.interface";
 import { ServerRoutesEnum } from "../enums/ServerRoutes.enum";
 import { RoutesNavigatorEnum } from "../enums/Routes.enum";
 import { ToastVarientEnum } from "../enums/ToastComponent.enum";
+import ButtonComponent from "../components/ButtonComponent";
+import { ButtonStyles } from "../enums/ButtonComponent.enum";
 
 function AdminLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const sideNavRef = useRef<HTMLDivElement>(null);
+  const darkOverlayRef = useRef<HTMLDivElement>(null);
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -49,17 +55,53 @@ function AdminLayout() {
       });
   };
 
+  const toggleSideNav = () => {
+    darkOverlayRef.current?.classList.toggle("hidden");
+    sideNavRef.current?.classList.toggle("translate-x-full");
+  };
+
+  const closeSideNav = () => {
+    darkOverlayRef.current?.classList.add("hidden");
+    sideNavRef.current?.classList.add("translate-x-full");
+  };
+
   return (
-    <main className="flex h-screen">
-      <div className="prose prose-lg prose-invert p-3 bg-zinc-900 h-full w-1/5 border-r border-zinc-700 flex flex-col">
+    <div className="flex flex-col h-dvh relative overflow-y-auto overflow-x-hidden md:flex-row">
+      <div className="bg-zinc-900 border-b-1 border-zinc-700 p-2 flex items-center justify-end md:hidden">
+        <ButtonComponent callback={toggleSideNav} style={ButtonStyles.ICON}>
+          <MenuIcon className="stroke-white w-10 !max-w-10"></MenuIcon>
+        </ButtonComponent>
+      </div>
+
+      <div
+        onClick={closeSideNav}
+        ref={darkOverlayRef}
+        id="custom-dark-overlay"
+        className="absolute w-screen h-dvh bg-zinc-950/40 backdrop-blur-sm hidden md:hidden"
+      ></div>
+
+      <nav
+        ref={sideNavRef}
+        id="custom-side-navigation"
+        className="prose prose-lg prose-invert absolute right-0 p-2 bg-zinc-900 h-full w-72 border-l border-zinc-700 flex flex-col translate-x-full transition md:p-3 md:translate-x-0 md:border-r md:relative md:w-1/3 lg:w-1/4 xl:w-1/5"
+      >
+        <ButtonComponent
+          className="mb-3 ml-auto md:hidden"
+          callback={closeSideNav}
+          style={ButtonStyles.ICON}
+        >
+          <CloseIcon className="w-10 !max-w-10 stroke-white"></CloseIcon>
+        </ButtonComponent>
+
         <div>
           <div className="flex flex-col gap-2">
             <button
               onClick={() => {
-                navigate("/admin/dashboard");
+                closeSideNav();
+                navigate(RoutesNavigatorEnum.USER_DASHBOARD);
               }}
               className={`p-3 rounded-lg flex items-center gap-2 ${
-                isActive("/admin/dashboard")
+                isActive(RoutesNavigatorEnum.USER_DASHBOARD)
                   ? "bg-zinc-50/10"
                   : "hover:bg-zinc-50/5"
               }`}
@@ -70,10 +112,11 @@ function AdminLayout() {
 
             <button
               onClick={() => {
-                navigate("/admin/blogs");
+                closeSideNav();
+                navigate(RoutesNavigatorEnum.USER_BLOGS);
               }}
               className={`p-3 rounded-lg flex items-center gap-2 ${
-                isActive("/admin/blogs")
+                isActive(RoutesNavigatorEnum.USER_BLOGS)
                   ? "bg-zinc-50/10"
                   : "hover:bg-zinc-50/5"
               }`}
@@ -91,7 +134,7 @@ function AdminLayout() {
                 content:
                   "prose prose-lg prose-invert bg-zinc-900 border border-zinc-700 p-1 w-36 flex flex-col gap-1",
               }}
-              placement="right"
+              backdrop="blur"
             >
               <PopoverTrigger>
                 <Button
@@ -122,12 +165,12 @@ function AdminLayout() {
             </Popover>
           </div>
         </div>
-      </div>
+      </nav>
 
-      <div className="bg-zinc-950 h-full w-4/5 p-5">
+      <main className="bg-zinc-950 h-full w-full p-3 md:p-5 md:w-2/3 lg:w-3/4 xl:w-4/5">
         <Outlet />
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }
 

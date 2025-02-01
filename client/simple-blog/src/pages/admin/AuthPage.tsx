@@ -1,7 +1,7 @@
 import { useState } from "react";
 import FormComponent from "../../components/FormComponent";
 import { UserLoginFormStructure } from "../../definitions/Form.definition";
-import { sendReq } from "../../utils/CustomAxios.utils";
+import { sendReq } from "../../utils/CustomAxios.util";
 import { UserLoginInterface } from "../../interfaces/ServerResponse.interface";
 import { ServerRoutesEnum } from "../../enums/ServerRoutes.enum";
 import { useNavigate } from "react-router";

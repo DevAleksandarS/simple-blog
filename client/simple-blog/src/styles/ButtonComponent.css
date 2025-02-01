@@ -1,0 +1,7 @@
+.custom-button-icon {
+    @apply bg-transparent p-0 h-auto min-w-fit rounded border border-zinc-800;
+}
+
+.custom-button-default {
+    @apply bg-white rounded-lg text-lg px-6;
+}

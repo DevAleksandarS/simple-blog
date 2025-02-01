@@ -11,6 +11,7 @@ import AdminAuthLayout from "./layouts/AdminAuthLayout";
 import { OverlayLoadingProvider } from "./contexts/LoadingOverlayContext";
 import LoaderOverlayComponent from "./components/LoaderOverlayComponent";
 import BlogsPage from "./pages/admin/BlogsPage";
+import { RoutesEnum } from "./enums/Routes.enum";
 
 function App() {
   const navigate = useNavigate();
@@ -38,14 +39,14 @@ function App() {
           <Routes>
             <Route index element={<DefaultPage />} />
 
-            <Route path="admin" element={<AdminAuthLayout />}>
+            <Route path={RoutesEnum.ADMIN} element={<AdminAuthLayout />}>
               <Route index element={<AuthPage />} />
-              <Route path="init" element={<InitPage />} />
+              <Route path={RoutesEnum.INIT} element={<InitPage />} />
             </Route>
 
-            <Route path="admin" element={<AdminLayout />}>
-              <Route path="dashboard" element={<DashboardPage />} />
-              <Route path="blogs" element={<BlogsPage />} />
+            <Route path={RoutesEnum.ADMIN} element={<AdminLayout />}>
+              <Route path={RoutesEnum.DASHBOARD} element={<DashboardPage />} />
+              <Route path={RoutesEnum.BLOGS} element={<BlogsPage />} />
             </Route>
           </Routes>
 
