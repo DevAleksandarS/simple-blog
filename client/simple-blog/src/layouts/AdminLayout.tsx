@@ -66,7 +66,7 @@ function AdminLayout() {
   };
 
   return (
-    <div className="flex flex-col h-screen relative overflow-y-auto overflow-x-hidden md:flex-row">
+    <div className="flex flex-col h-dvh relative overflow-y-auto overflow-x-hidden md:flex-row">
       <div className="bg-zinc-900 border-b-1 border-zinc-700 p-2 flex items-center justify-end md:hidden">
         <ButtonComponent callback={toggleSideNav} style={ButtonStyles.ICON}>
           <MenuIcon className="stroke-white w-10 !max-w-10"></MenuIcon>
@@ -77,7 +77,7 @@ function AdminLayout() {
         onClick={closeSideNav}
         ref={darkOverlayRef}
         id="custom-dark-overlay"
-        className="absolute w-screen h-screen bg-zinc-950/40 backdrop-blur-sm hidden md:hidden"
+        className="absolute w-screen h-dvh bg-zinc-950/40 backdrop-blur-sm hidden md:hidden"
       ></div>
 
       <nav
@@ -98,10 +98,10 @@ function AdminLayout() {
             <button
               onClick={() => {
                 closeSideNav();
-                navigate("/admin/dashboard");
+                navigate(RoutesNavigatorEnum.USER_DASHBOARD);
               }}
               className={`p-3 rounded-lg flex items-center gap-2 ${
-                isActive("/admin/dashboard")
+                isActive(RoutesNavigatorEnum.USER_DASHBOARD)
                   ? "bg-zinc-50/10"
                   : "hover:bg-zinc-50/5"
               }`}
@@ -113,10 +113,10 @@ function AdminLayout() {
             <button
               onClick={() => {
                 closeSideNav();
-                navigate("/admin/blogs");
+                navigate(RoutesNavigatorEnum.USER_BLOGS);
               }}
               className={`p-3 rounded-lg flex items-center gap-2 ${
-                isActive("/admin/blogs")
+                isActive(RoutesNavigatorEnum.USER_BLOGS)
                   ? "bg-zinc-50/10"
                   : "hover:bg-zinc-50/5"
               }`}
@@ -134,7 +134,7 @@ function AdminLayout() {
                 content:
                   "prose prose-lg prose-invert bg-zinc-900 border border-zinc-700 p-1 w-36 flex flex-col gap-1",
               }}
-              placement="right"
+              backdrop="blur"
             >
               <PopoverTrigger>
                 <Button
