@@ -2,6 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
+/* FONTS */
+@font-face{
+  font-family: "LexendDeca";
+  src: local("LexendDeca-Light"), url('./assets/fonts/LexendDeca/LexendDeca-Light.ttf');
+  font-weight: 300;
+}
+
+@font-face{
+  font-family: "LexendDeca";
+  src: local("LexendDeca-Medium"), url('./assets/fonts/LexendDeca/LexendDeca-Medium.ttf');
+  font-weight: 500;
+}
+
+/* ADMIN SIDE TYPOGRAPHY */
+.admin-layout,
+.admin-layout p,
+.admin-layout span,
+.admin-layout h1,
+.admin-layout h2,
+.admin-layout h3,
+.admin-layout h4,
+.admin-layout h5,
+.admin-layout h6,
+.admin-layout label,
+.admin-layout input,
+.admin-layout button {
+  font-family: "LexendDeca";
+  @apply font-light text-white tracking-wide;
+}
+
+.admin-layout h1,
+.admin-layout h2,
+.admin-layout h3,
+.admin-layout h4,
+.admin-layout h5,
+.admin-layout h6 {
+  @apply font-medium;
+}
+
+.admin-layout h1 {
+  @apply text-4xl md:text-5xl;
+}
+
+.admin-layout h2 {
+  @apply text-2xl md:text-3xl;
+}
+
+.admin-layout,
+.admin-layout p,
+.admin-layout span,
+.admin-layout label,
+.admin-layout input,
+.admin-layout button {
+  font-size: 16px;
+}
+
+/* NOTISTACK */
 .custom-notistack {
   @apply !max-w-96;
 }

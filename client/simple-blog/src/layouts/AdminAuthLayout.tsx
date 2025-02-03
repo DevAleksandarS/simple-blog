@@ -3,7 +3,7 @@ import Logo from "../assets/logo.svg?react";
 
 function AdminAuthLayout() {
   return (
-    <main className="flex h-screen bg-zinc-900">
+    <main className="admin-layout flex h-screen bg-zinc-900">
       <div className="grid place-items-center px-5 py-10 overflow-y-auto w-full md:w-1/2 lg:w-2/6">
         <div className="z-10">
           <Logo className="mx-auto" />

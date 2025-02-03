@@ -1,7 +1,7 @@
-.custom-button-icon {
+.admin-layout button.custom-button-icon {
     @apply bg-transparent p-0 h-auto min-w-fit rounded border border-zinc-800;
 }
 
-.custom-button-default {
-    @apply bg-white rounded-lg text-lg px-6;
+.admin-layout button.custom-button-default {
+    @apply bg-white text-zinc-900 font-medium rounded-lg text-lg px-6;
 }

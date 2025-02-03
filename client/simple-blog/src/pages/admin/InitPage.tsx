@@ -82,10 +82,10 @@ function InitPage() {
   };
 
   return (
-    <div className="prose prose-lg prose-invert prose-h2:mb-4">
+    <div>
       <h2>Initialize</h2>
 
-      <p>
+      <p className="mt-2 mb-6">
         The Init page registers the first user as an admin if no users exist.
       </p>
 
