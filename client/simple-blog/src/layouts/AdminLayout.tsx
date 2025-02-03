@@ -1,9 +1,9 @@
 import { Outlet, useLocation, useNavigate } from "react-router";
-import UserIcon from "../assets/user-icon.svg?react";
-import DashboardIcon from "../assets/dashboard-icon.svg?react";
-import FileIcon from "../assets/file-icon.svg?react";
-import MenuIcon from "../assets/menu-icon.svg?react";
-import CloseIcon from "../assets/close-icon.svg?react";
+import UserIcon from "../assets/icons/user-icon.svg?react";
+import DashboardIcon from "../assets/icons/dashboard-icon.svg?react";
+import FileIcon from "../assets/icons/file-icon.svg?react";
+import MenuIcon from "../assets/icons/menu-icon.svg?react";
+import CloseIcon from "../assets/icons/close-icon.svg?react";
 import { Button } from "@nextui-org/button";
 import { Popover, PopoverTrigger, PopoverContent } from "@heroui/popover";
 import { useRef, useState } from "react";
