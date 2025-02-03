@@ -54,10 +54,10 @@ function AuthPage() {
   };
 
   return (
-    <div className="prose prose-lg prose-invert prose-h2:mb-4">
+    <div>
       <h2>Login</h2>
 
-      <p>
+      <p className="mt-2 mb-6">
         Login to your account to access personalized features and manage your
         preferences.
       </p>

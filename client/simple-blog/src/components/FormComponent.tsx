@@ -12,7 +12,7 @@ function FormComponent({
 }: FormComponentProps) {
   return (
     <Form
-      className="prose w-full justify-center items-center gap-3"
+      className="w-full justify-center items-center gap-3"
       onSubmit={callback}
     >
       {structure.map((el) => {

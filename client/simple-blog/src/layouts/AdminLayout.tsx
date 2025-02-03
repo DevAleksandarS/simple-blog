@@ -66,7 +66,7 @@ function AdminLayout() {
   };
 
   return (
-    <div className="flex flex-col h-dvh relative overflow-y-auto overflow-x-hidden md:flex-row">
+    <div className="admin-layout flex flex-col h-dvh relative overflow-y-auto overflow-x-hidden md:flex-row">
       <div className="bg-zinc-900 border-b-1 border-zinc-700 p-2 flex items-center justify-end md:hidden">
         <ButtonComponent callback={toggleSideNav} style={ButtonStyles.ICON}>
           <MenuIcon className="stroke-white w-10 !max-w-10"></MenuIcon>
@@ -83,7 +83,7 @@ function AdminLayout() {
       <nav
         ref={sideNavRef}
         id="custom-side-navigation"
-        className="prose prose-lg prose-invert absolute right-0 p-2 bg-zinc-900 h-full w-72 border-l border-zinc-700 flex flex-col translate-x-full transition md:p-3 md:translate-x-0 md:border-r md:relative md:w-1/3 lg:w-1/4 xl:w-1/5"
+        className="absolute right-0 p-2 bg-zinc-900 h-full w-72 border-l border-zinc-700 flex flex-col translate-x-full transition md:p-3 md:translate-x-0 md:border-r md:relative md:w-1/3 lg:w-1/4 xl:w-1/5"
       >
         <ButtonComponent
           className="mb-3 ml-auto md:hidden"
@@ -132,7 +132,7 @@ function AdminLayout() {
             <Popover
               classNames={{
                 content:
-                  "prose prose-lg prose-invert bg-zinc-900 border border-zinc-700 p-1 w-36 flex flex-col gap-1",
+                  "bg-zinc-900 border border-zinc-700 p-1 w-36 flex flex-col gap-1",
               }}
               backdrop="blur"
             >
@@ -144,13 +144,11 @@ function AdminLayout() {
                   className="px-3 py-2 h-full w-full rounded-lg justify-start"
                 >
                   <UserIcon className="w-8 h-8 stroke-white" />
-                  <p className="m-0 prose prose-lg prose-invert">
-                    Aleksandar S.
-                  </p>
+                  <p className="m-0">Aleksandar S.</p>
                 </Button>
               </PopoverTrigger>
 
-              <PopoverContent>
+              <PopoverContent className="admin-layout">
                 <button className="w-full py-1 rounded-lg text-lg hover:bg-zinc-50/5">
                   Settings
                 </button>
