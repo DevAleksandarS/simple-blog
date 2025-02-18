@@ -1,4 +1,4 @@
-import { forwardRef, useEffect } from "react";
+import { forwardRef } from "react";
 import { useSnackbar, SnackbarContent, CustomContentProps } from "notistack";
 
 const ToastComponent = forwardRef<HTMLDivElement, CustomContentProps>(
