@@ -1,15 +1,41 @@
 import { TableComponentPropsInterface } from "../interfaces/TableComponent.interface";
 import "../styles/TableComponent.css";
-import { Pagination } from "@nextui-org/react";
+import { Pagination, Skeleton } from "@nextui-org/react";
 
 function TableComponent({
-  numberOfRows,
+  pagesNumber,
   headerRow,
   tableData,
+  isLoading,
   callback,
 }: TableComponentPropsInterface) {
-  const getPage = (page: string | number | undefined) => {
-    console.log(page);
+  const getSkeleton = () => {
+    return Array.from({ length: 10 }).map(() => {
+      return (
+        <tr>
+          {headerRow.map((_, index) => {
+            return (
+              <td
+                className={`p-4 group-hover:bg-zinc-900 ${
+                  index == 0
+                    ? "rounded-l-xl"
+                    : index == headerRow.length - 1
+                    ? "rounded-r-xl"
+                    : ""
+                }`}
+              >
+                <Skeleton
+                  className="max-w-80 w-auto rounded-xl h-6"
+                  classNames={{
+                    base: "bg-zinc-900 before:opacity-10",
+                  }}
+                />
+              </td>
+            );
+          })}
+        </tr>
+      );
+    });
   };
 
   return (
@@ -40,27 +66,29 @@ function TableComponent({
           <div className="h-2"></div>
 
           <tbody>
-            {tableData.map((row) => {
-              return (
-                <tr className="group">
-                  {row.map((el, index) => {
-                    return (
-                      <td
-                        className={`p-4 group-hover:bg-zinc-900 ${
-                          index == 0
-                            ? "rounded-l-xl"
-                            : index == headerRow.length - 1
-                            ? "rounded-r-xl"
-                            : ""
-                        }`}
-                      >
-                        <div className="max-w-80 truncate">{el.text}</div>
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
+            {isLoading
+              ? getSkeleton()
+              : tableData.map((row) => {
+                  return (
+                    <tr className="group">
+                      {row.map((el, index) => {
+                        return (
+                          <td
+                            className={`p-4 group-hover:bg-zinc-900 ${
+                              index == 0
+                                ? "rounded-l-xl"
+                                : index == headerRow.length - 1
+                                ? "rounded-r-xl"
+                                : ""
+                            }`}
+                          >
+                            <div className="max-w-80 truncate">{el.text}</div>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
           </tbody>
         </table>
       </div>
@@ -71,8 +99,8 @@ function TableComponent({
           isCompact
           showControls
           initialPage={1}
-          total={10}
-          onChange={getPage}
+          total={pagesNumber}
+          onChange={callback}
           classNames={{
             item: "bg-zinc-900 text-white active:bg-zinc-900 data-[hover=true]:[&:not(data-[active=true])]:bg-zinc-800",
             prev: "bg-zinc-900 text-white data-[hover=true]:[&:not(data-[active=true])]:bg-zinc-800",

@@ -3,8 +3,9 @@ export interface HeaderRowInterface {
 }
 
 export interface TableComponentPropsInterface {
-  numberOfRows: number;
+  pagesNumber: number;
   headerRow: HeaderRowInterface[];
   tableData: HeaderRowInterface[][];
-  callback(): any;
+  isLoading: boolean;
+  callback(page: string | number | undefined): any;
 }

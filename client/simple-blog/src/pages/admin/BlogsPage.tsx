@@ -1,6 +1,4 @@
-import { text } from "framer-motion/client";
 import TableComponent from "../../components/TableComponent";
-import { HeaderRowInterface } from "../../interfaces/TableComponent.interface";
 
 const HeaderRows = [
   {
@@ -62,15 +60,18 @@ const tableData = [
 ];
 
 function BlogsPage() {
-  const callback = () => {};
+  const callback = (page: string | number | undefined) => {
+    console.log(page);
+  };
 
   return (
     <>
       <TableComponent
-        numberOfRows={3}
+        pagesNumber={3}
         headerRow={HeaderRows}
         tableData={tableData}
         callback={callback}
+        isLoading={false}
       ></TableComponent>
     </>
   );
