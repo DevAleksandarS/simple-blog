@@ -165,7 +165,7 @@ function AdminLayout() {
         </div>
       </nav>
 
-      <main className="bg-zinc-950 h-full w-full p-3 md:p-5 md:w-2/3 lg:w-3/4 xl:w-4/5">
+      <main className="bg-zinc-950 h-full w-full p-3 overflow-y-auto md:p-5 md:w-2/3 lg:w-3/4 xl:w-4/5">
         <Outlet />
       </main>
     </div>
