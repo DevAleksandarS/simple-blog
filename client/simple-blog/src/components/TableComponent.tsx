@@ -3,7 +3,7 @@ import "../styles/TableComponent.css";
 import { Pagination, Skeleton } from "@nextui-org/react";
 
 function TableComponent({
-  pagesNumber,
+  pagesNumber = 1,
   headerRow,
   tableData,
   isLoading,
@@ -48,6 +48,7 @@ function TableComponent({
               {headerRow.map((el, index) => {
                 return (
                   <th
+                    key={index}
                     className={`text-left p-4 bg-zinc-800 ${
                       index == 0
                         ? "rounded-l-xl"
@@ -63,17 +64,19 @@ function TableComponent({
             </tr>
           </thead>
 
-          <div className="h-2"></div>
-
           <tbody>
+            <tr>
+              <td colSpan={headerRow.length} className="h-2"></td>
+            </tr>
             {isLoading
               ? getSkeleton()
-              : tableData.map((row) => {
+              : tableData.map((row, index) => {
                   return (
-                    <tr className="group">
+                    <tr key={index} className="group">
                       {row.map((el, index) => {
                         return (
                           <td
+                            key={index}
                             className={`p-4 group-hover:bg-zinc-900 ${
                               index == 0
                                 ? "rounded-l-xl"
